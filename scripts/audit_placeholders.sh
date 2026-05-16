@@ -66,6 +66,9 @@ IGNORE_DIRS=(
   "external"
   ".cache"
   "site-packages"
+  "*.egg-info"
+  "build"
+  "dist"
 )
 
 EXCLUDE_ARGS=()

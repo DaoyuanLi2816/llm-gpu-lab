@@ -1,5 +1,9 @@
 # llm-gpu-lab
 
+[![CI](https://github.com/DaoyuanLi2816/llm-gpu-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/DaoyuanLi2816/llm-gpu-lab/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+
 > **One GPU. Full LLM workflow. Real benchmarks. No cloud required.**
 
 `llm-gpu-lab` is a hands-on, end-to-end LLM toolkit you can run on a single
