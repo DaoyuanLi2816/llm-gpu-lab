@@ -89,7 +89,7 @@ plus a one-time ~270 MB Hugging Face download for SmolLM2-135M.
 | SFT LoRA  (Qwen)    | `configs/sft/qwen2_5_0_5b_lora_smoke.yaml`        |   ~30 s    | Qwen2.5-0.5B-Instruct, LoRA r=8               |
 | SFT QLoRA           | `configs/sft/qwen3_0_6b_qlora_4080.yaml`          |   ~1 min   | Qwen3-0.6B, bnb 4-bit, LoRA r=16              |
 
-## Measured benchmarks (RTX 4080 16 GB, May 2026)
+## Measured benchmarks (RTX 4080 16 GB)
 
 These are the literal numbers from `results/rtx4080/benchmark_summary.json`
 and `results/rtx4080/pretrain_metrics.json` after running `make smoke` on

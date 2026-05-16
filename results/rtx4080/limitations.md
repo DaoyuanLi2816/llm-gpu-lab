@@ -1,4 +1,4 @@
-# Local limitations — RTX 4080 16 GB, Windows 11, May 2026
+# Local limitations — RTX 4080 16 GB, Windows 11
 
 Hand-curated. Each entry records why a step degraded, was skipped, or
 behaved unexpectedly. Honest by design.
