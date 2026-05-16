@@ -1,0 +1,63 @@
+{
+  "name": "tiny_10m_smoke",
+  "device": "cuda",
+  "precision": "bf16",
+  "model": {
+    "n_layer": 4,
+    "n_head": 4,
+    "n_embd": 128,
+    "block_size": 128,
+    "vocab_size": 4096,
+    "num_params": 1328256
+  },
+  "data": {
+    "source": "synthetic",
+    "n_examples": 3000,
+    "packed_train_blocks": 531,
+    "packed_eval_blocks": 59
+  },
+  "train": {
+    "batch_size": 16,
+    "max_steps": 200,
+    "lr": 0.0003,
+    "grad_clip": 1.0,
+    "warmup_steps": 20
+  },
+  "results": {
+    "first_loss": 8.37078857421875,
+    "last_loss": 2.1089534759521484,
+    "min_loss": 2.1089534759521484,
+    "final_eval_loss": 2.1774142265319822,
+    "wall_clock_s": 1.494,
+    "tokens_per_s": 274152.6,
+    "steps": 200
+  },
+  "eval_curve": [
+    {
+      "step": 50,
+      "eval_loss": 5.037551498413086
+    },
+    {
+      "step": 100,
+      "eval_loss": 3.214051628112793
+    },
+    {
+      "step": 150,
+      "eval_loss": 2.4280019760131837
+    },
+    {
+      "step": 200,
+      "eval_loss": 2.1774142265319822
+    }
+  ],
+  "checkpoint": {
+    "dir": "artifacts\\checkpoints\\tiny_10m_smoke",
+    "weights_file": "final.safetensors",
+    "config_file": "config.json"
+  },
+  "telemetry_summary": {
+    "max_torch_allocated_bytes": 178323456,
+    "max_torch_reserved_bytes": 211812352
+  },
+  "metrics_jsonl": "results\\rtx4080\\pretrain_metrics.jsonl"
+}

@@ -1,0 +1,21 @@
+name: qwen2_5_0_5b_lora_smoke
+base_model: Qwen/Qwen2.5-0.5B-Instruct
+fallback_base_model: HuggingFaceTB/SmolLM2-135M-Instruct
+qlora: false
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+target_modules: null   # auto-detect
+max_seq_length: 256
+batch_size: 1
+grad_accum_steps: 8
+max_steps: 40
+lr: 2.0e-4
+warmup_ratio: 0.1
+seed: 1337
+precision: auto
+n_train_examples: 64
+n_eval_examples: 16
+output_dir: artifacts/adapters/qwen2_5_0_5b_lora_smoke
+metrics_dir: results/rtx4080
+use_gradient_checkpointing: true

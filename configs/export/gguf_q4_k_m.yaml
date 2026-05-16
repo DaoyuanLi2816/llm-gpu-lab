@@ -1,0 +1,8 @@
+name: gguf_q4_k_m
+base_model: HuggingFaceTB/SmolLM2-135M-Instruct
+adapter_path: artifacts/adapters/smollm2_135m_lora_fallback/adapter
+merged_dir: artifacts/merged/smollm2_135m_lora
+gguf_out_dir: artifacts/gguf
+quant_type: Q4_K_M
+llamacpp_dir: external/llama.cpp
+limitations_path: results/rtx4080/limitations.md

@@ -1,0 +1,10 @@
+name: smoke_eval
+# Set these to point at your finetuned model. If both are null the runner
+# falls back to a deterministic echo so the JSON shape is still produced.
+base_model: HuggingFaceTB/SmolLM2-135M-Instruct
+adapter_path: artifacts/adapters/smollm2_135m_lora_fallback/adapter
+prompts_path: examples/prompts/eval_prompts.jsonl
+max_new_tokens: 96
+out: results/rtx4080/eval_results.json
+precision: auto
+use_chat_template: true

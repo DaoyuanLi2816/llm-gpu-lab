@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+.installed.cfg
+pip-wheel-metadata/
+
+# Virtualenvs / environment
+.venv/
+venv/
+env/
+.python-version
+.envrc
+.env
+
+# Test / lint caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project artifacts (large) — keep results/rtx4080/*.json + *.html + *.md
+artifacts/checkpoints/
+artifacts/adapters/
+artifacts/tokenizers/
+artifacts/merged/
+artifacts/gguf/
+data/raw/
+data/processed/
+external/
+.cache/
+
+# Tracked: small synthetic corpora and prompts are kept under examples/.
+
+# Model / data binaries — never commit
+*.gguf
+*.safetensors
+*.pt
+*.bin
+*.ckpt
+*.onnx
+*.npz
+*.tflite
+
+# HF / training caches
+huggingface/
+.huggingface/
+wandb/
+runs/
+mlruns/
+lightning_logs/
+checkpoints/
+
+# Logs
+*.log
+logs/
+
+# Coverage / docs build
+docs/_build/
+
+# Keep small results JSON/HTML/MD that the report needs
+!results/rtx4080/*.json
+!results/rtx4080/*.html
+!results/rtx4080/*.md
+!results/rtx4080/*.png

@@ -1,0 +1,113 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-gpu-lab"
+version = "0.1.0"
+description = "One GPU. Full LLM workflow. Real benchmarks. No cloud required."
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = { text = "Apache-2.0" }
+authors = [{ name = "llm-gpu-lab contributors" }]
+keywords = ["llm", "gpu", "pytorch", "transformers", "peft", "lora", "qlora", "gguf", "llama.cpp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+    "pydantic>=2.5",
+    "typer>=0.12",
+    "rich>=13.7",
+    "tqdm>=4.66",
+    "psutil>=5.9",
+    "jinja2>=3.1",
+    "matplotlib>=3.8",
+    "pandas>=2.1",
+    "nvidia-ml-py>=12.535",
+]
+
+[project.optional-dependencies]
+torch = [
+    "torch>=2.1",
+    "safetensors>=0.4",
+]
+nlp = [
+    "tokenizers>=0.20",
+    "transformers>=4.45",
+    "datasets>=2.21",
+    "accelerate>=0.34",
+    "peft>=0.13",
+    "trl>=0.11",
+]
+quant = [
+    "bitsandbytes>=0.44; platform_system != 'Darwin'",
+]
+eval = [
+    "lm-eval>=0.4.4",
+]
+hub = [
+    "huggingface_hub>=0.25",
+]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+all = [
+    "llm-gpu-lab[torch,nlp,quant,eval,hub,dev]",
+]
+
+[project.scripts]
+llm-gpu-lab = "llm_gpu_lab.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/DaoyuanLi2816/llm-gpu-lab"
+Issues = "https://github.com/DaoyuanLi2816/llm-gpu-lab/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["llm_gpu_lab*"]
+
+[tool.setuptools.package-data]
+"llm_gpu_lab" = ["report/templates/*.html.j2"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+extend-exclude = ["external", ".cache", "artifacts", "results", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "W", "N", "RUF"]
+ignore = [
+    "N812",     # lowercase imported as non-lowercase
+    "E501",     # line too long
+    "B008",     # function call in default argument (Typer pattern)
+    "RUF012",   # mutable class attributes
+    "RUF013",   # implicit Optional
+    "B007",     # unused loop var (sometimes intentional)
+    "UP006",    # use list[...] instead of List[...] — we type-hint widely
+    "UP007",    # use X | Y unions — same reason
+    "UP035",    # deprecated typing imports
+    "UP045",    # X | None
+    "RUF005",   # tuple unpacking in default
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402", "PLC2701", "RUF100"]
+"src/llm_gpu_lab/cli.py" = ["B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "gpu: requires CUDA GPU (skipped when unavailable)",
+    "slow: takes more than a few seconds",
+    "download: downloads weights/datasets from the internet",
+]

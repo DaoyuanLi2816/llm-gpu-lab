@@ -1,0 +1,24 @@
+{
+  "name": "smollm2_135m_lora_fallback",
+  "base_model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "fallback_used": false,
+  "used_qlora": false,
+  "train_runtime_s": 7.803,
+  "train_loss": 2.4,
+  "first_loss": 3.2954,
+  "eval_loss": 2.6631,
+  "loss_curve_first_last_min": [
+    3.2954,
+    2.4,
+    2.4
+  ],
+  "n_train_examples": 48,
+  "n_eval_examples": 12,
+  "final_seq_len": 256,
+  "final_lora_r": 8,
+  "lora_alpha": 16,
+  "max_steps": 30,
+  "batch_size": 1,
+  "grad_accum_steps": 4,
+  "adapter_dir": "artifacts\\adapters\\smollm2_135m_lora_fallback\\adapter"
+}

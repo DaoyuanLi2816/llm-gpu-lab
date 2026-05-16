@@ -1,0 +1,109 @@
+{
+  "torch_available": true,
+  "torch_version": "2.6.0+cu124",
+  "device": "cuda",
+  "matmul": [
+    {
+      "size": 512,
+      "dtype": "fp32",
+      "iters": 128,
+      "duration_s": 0.006,
+      "tflops": 5.746
+    },
+    {
+      "size": 512,
+      "dtype": "fp16",
+      "iters": 128,
+      "duration_s": 0.004,
+      "tflops": 8.619
+    },
+    {
+      "size": 512,
+      "dtype": "bf16",
+      "iters": 128,
+      "duration_s": 0.004,
+      "tflops": 8.619
+    },
+    {
+      "size": 1024,
+      "dtype": "fp32",
+      "iters": 32,
+      "duration_s": 0.007,
+      "tflops": 9.85
+    },
+    {
+      "size": 1024,
+      "dtype": "fp16",
+      "iters": 64,
+      "duration_s": 0.0039,
+      "tflops": 34.914
+    },
+    {
+      "size": 1024,
+      "dtype": "bf16",
+      "iters": 64,
+      "duration_s": 0.005,
+      "tflops": 27.266
+    },
+    {
+      "size": 2048,
+      "dtype": "fp32",
+      "iters": 16,
+      "duration_s": 0.0219,
+      "tflops": 12.552
+    },
+    {
+      "size": 2048,
+      "dtype": "fp16",
+      "iters": 16,
+      "duration_s": 0.0074,
+      "tflops": 36.915
+    },
+    {
+      "size": 2048,
+      "dtype": "bf16",
+      "iters": 16,
+      "duration_s": 0.008,
+      "tflops": 34.474
+    }
+  ],
+  "train_step": [
+    {
+      "hidden": 256,
+      "vocab": 4096,
+      "batch": 16,
+      "iters": 16,
+      "duration_s": 0.0061,
+      "steps_per_s": 2641.04
+    },
+    {
+      "hidden": 512,
+      "vocab": 4096,
+      "batch": 16,
+      "iters": 16,
+      "duration_s": 0.0045,
+      "steps_per_s": 3545.67
+    },
+    {
+      "hidden": 1024,
+      "vocab": 4096,
+      "batch": 16,
+      "iters": 16,
+      "duration_s": 0.0025,
+      "steps_per_s": 6327.44
+    }
+  ],
+  "tiny_gen": {
+    "model": "tiny_gpt",
+    "n_layer": 4,
+    "n_head": 4,
+    "n_embd": 128,
+    "new_tokens": 64,
+    "duration_s": 0.2362,
+    "tokens_per_s": 270.91,
+    "final_seq_len": 68
+  },
+  "device_name": "NVIDIA GeForce RTX 4080",
+  "max_allocated_bytes": 67239936,
+  "max_reserved_bytes": 81788928
+}

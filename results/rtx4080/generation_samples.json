@@ -1,0 +1,68 @@
+{
+  "checkpoint": "artifacts\\checkpoints\\tiny_10m_smoke\\final.safetensors",
+  "device": "cuda",
+  "tokens_per_s": 242.9,
+  "n_prompts": 10,
+  "samples": [
+    {
+      "prompt": "Once upon a time",
+      "continuation": ".... Jules white did. a green shell. everyone.\" And with everyone.\" And so they did a green walked through the with Quinn said, \"LetMaya walked through the quiet river with They planted a gold ribbon.",
+      "new_token_count": 48,
+      "latency_s": 0.4255
+    },
+    {
+      "prompt": "Maya walked through the forest",
+      "continuation": " is a green walked through the the tiny forest withThe river withA compass. They planted a said, \"Let us share it with Jules.. us share And they did equalsJules walked through the the us share it",
+      "new_token_count": 48,
+      "latency_s": 0.1873
+    },
+    {
+      "prompt": "two plus three equals",
+      "continuation": " the walked through the.\" red, \".The the wooden orchard with. They returned with Otto., \"Let us everyone.\" purple compass..Jules the warm walked through the the, \"Let us share it withSage",
+      "new_token_count": 48,
+      "latency_s": 0.1805
+    },
+    {
+      "prompt": "the color of the sky is",
+      "continuation": " green shell.The garden with everyone.\" And so silver happySage walked equals said, \"Let us share it with everyone \"Let walked through the the silver map. They. It they did. They drew a full of the small",
+      "new_token_count": 48,
+      "latency_s": 0.1894
+    },
+    {
+      "prompt": "A small fox lived in",
+      "continuation": " a everyone.\" And so they did. happy.The minus said they did.The color with. They drew a gold said, with everyone.\" And so they did..Otto.The walked through equals they ribbon",
+      "new_token_count": 48,
+      "latency_s": 0.1922
+    },
+    {
+      "prompt": "The librarian arranged the new books",
+      "continuation": ".Inka walked through the small everyone. They discovered a green. It made them happy. everyone a green did. everyone a blue walked through the tiny walked through the the them happy a gold, \"Let us share it with everyone.\"",
+      "new_token_count": 48,
+      "latency_s": 0.2021
+    },
+    {
+      "prompt": "Every morning, Iris visits the",
+      "continuation": " small it withOtto.The They planted. the shiny, a a silver. Cora They drew a compass. us It made them happy.Otto to yellow did.Greta walked through the said, \"Let us a silver",
+      "new_token_count": 48,
+      "latency_s": 0.1827
+    },
+    {
+      "prompt": "the lighthouse keeper kept a journal about",
+      "continuation": ", \"Let the.\" And so they did. It made a. equals two. Maya.Greta them happy. Kai. Milo said, \"Let us share everyone.\" And so they did. everyone.\" And so they did.",
+      "new_token_count": 48,
+      "latency_s": 0.1918
+    },
+    {
+      "prompt": "A young inventor built a small kite from",
+      "continuation": " red shell equals said, \".The village with everyone, walked through happy.The of the. They repaired a equals us share it with Kai said, \"Let equals did.Maya with everyone.\" And so they flute.",
+      "new_token_count": 48,
+      "latency_s": 0.1587
+    },
+    {
+      "prompt": "The river was wide and",
+      "continuation": " theThe walked through the patientThe walked through the tiny compass walked through the wooden a blue walked through the warm, \"Let. said, the with Otto. They red. a a green And so they zero.. It made them happy",
+      "new_token_count": 48,
+      "latency_s": 0.0658
+    }
+  ]
+}

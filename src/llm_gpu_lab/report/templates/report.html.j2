@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>llm-gpu-lab — local run report</title>
+<style>
+  :root { color-scheme: light; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         margin: 2.5rem auto; max-width: 1100px; padding: 0 1.5rem; line-height: 1.45;
+         color: #1f1f1f; }
+  h1 { font-size: 1.9rem; margin-bottom: 0.2rem; }
+  .tagline { color: #555; margin-top: 0; }
+  h2 { border-bottom: 1px solid #ddd; padding-bottom: 0.3rem; margin-top: 2rem; }
+  table { border-collapse: collapse; width: 100%; margin: 0.8rem 0 1.4rem; font-size: 0.92rem; }
+  th, td { border: 1px solid #e0e0e0; padding: 0.4rem 0.6rem; text-align: left;
+           vertical-align: top; }
+  th { background: #f5f7fa; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+              background: #f7f7f9; padding: 0.05rem 0.25rem; border-radius: 3px; }
+  pre { padding: 0.6rem 0.8rem; overflow-x: auto; line-height: 1.35; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .pill { display: inline-block; padding: 0.05rem 0.45rem; border-radius: 9999px;
+          font-size: 0.78rem; }
+  .pill.ok { background: #e7f6e7; color: #1f7a1f; }
+  .pill.warn { background: #fff4d6; color: #8a6500; }
+  .pill.bad { background: #fde7e7; color: #9a1f1f; }
+  .muted { color: #777; font-size: 0.85rem; }
+  img { max-width: 100%; height: auto; border: 1px solid #eee; border-radius: 4px;
+        background: #fff; }
+  details summary { cursor: pointer; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>llm-gpu-lab — local run report</h1>
+<p class="tagline"><em>One GPU. Full LLM workflow. Real benchmarks. No cloud required.</em></p>
+
+<p class="muted">All numbers below come from JSON artifacts under <code>results/</code> on
+this machine. If a section is missing, the corresponding step was not run or
+was honestly recorded as a limitation.</p>
+
+<h2>Environment</h2>
+{% if env %}
+<table>
+  <tr><th>System</th><td>{{ env.platform.system }} {{ env.platform.release }} ({{ env.platform.machine }})</td></tr>
+  <tr><th>Python</th><td>{{ env.platform.python_implementation }} {{ env.platform.python_version }}</td></tr>
+  <tr><th>Timestamp</th><td>{{ env.timestamp_utc }}</td></tr>
+  <tr><th>Git commit</th><td><code>{{ env.git_commit or '—' }}</code></td></tr>
+  {% if env.torch %}
+  <tr><th>torch</th><td>
+    {{ env.torch.version or '—' }} ·
+    CUDA available: {{ 'yes' if env.torch.cuda_available else 'no' }} ·
+    CUDA runtime: {{ env.torch.cuda_runtime_version or '—' }} ·
+    bf16: {{ 'yes' if env.torch.bf16_supported else 'no' }}
+  </td></tr>
+  {% endif %}
+  {% if env.torch and env.torch.devices %}
+  <tr><th>GPU</th><td>
+    {% for d in env.torch.devices %}
+      <div>{{ d.name }} — {{ d.total_memory_gib }} GiB · capability {{ d.capability }}</div>
+    {% endfor %}
+  </td></tr>
+  {% endif %}
+  {% if env.nvml and env.nvml.driver_version %}
+  <tr><th>Driver</th><td>{{ env.nvml.driver_version }}</td></tr>
+  {% endif %}
+</table>
+{% else %}
+<p class="muted">No <code>environment.json</code> found — run <code>make doctor</code>.</p>
+{% endif %}
+
+<h2>Pretrain</h2>
+{% if pretrain %}
+<table>
+  <tr><th>Config</th><td>{{ pretrain.name }} on {{ pretrain.device }} ({{ pretrain.precision }})</td></tr>
+  <tr><th>Model</th><td>
+    {{ pretrain.model.n_layer }} layers · {{ pretrain.model.n_head }} heads · embed {{ pretrain.model.n_embd }} ·
+    block {{ pretrain.model.block_size }} · vocab {{ pretrain.model.vocab_size }} ·
+    {{ "%.2f"|format(pretrain.model.num_params / 1e6) }} M params
+  </td></tr>
+  <tr><th>Steps</th><td>{{ pretrain.results.steps }}</td></tr>
+  <tr><th>First → last loss</th><td>
+    {{ "%.4f"|format(pretrain.results.first_loss) }} →
+    {{ "%.4f"|format(pretrain.results.last_loss) }}
+    (min {{ "%.4f"|format(pretrain.results.min_loss) }})
+  </td></tr>
+  <tr><th>Final eval loss</th><td>{{ "%.4f"|format(pretrain.results.final_eval_loss) }}</td></tr>
+  <tr><th>Wall clock</th><td>{{ pretrain.results.wall_clock_s }} s</td></tr>
+  <tr><th>Tokens / s</th><td>{{ pretrain.results.tokens_per_s }}</td></tr>
+  <tr><th>Max VRAM (torch reserved)</th><td>{{ fmt_bytes(pretrain.telemetry_summary.max_torch_reserved_bytes) }}</td></tr>
+</table>
+{% if plots.pretrain_loss %}
+<img alt="pretrain loss curve" src="data:image/png;base64,{{ plots.pretrain_loss }}">
+{% endif %}
+{% else %}
+<p class="muted">No pretrain metrics found.</p>
+{% endif %}
+
+<h2>SFT (LoRA / QLoRA)</h2>
+{% if sft %}
+<table>
+  <tr><th>Base model</th><td>{{ sft.base_model }} {% if sft.fallback_used %}<span class="pill warn">fallback used</span>{% endif %}</td></tr>
+  <tr><th>Method</th><td>{{ 'QLoRA (4-bit)' if sft.used_qlora else 'LoRA' }} · r={{ sft.final_lora_r }} · alpha={{ sft.lora_alpha }} · seq_len={{ sft.final_seq_len }}</td></tr>
+  <tr><th>Train</th><td>{{ sft.max_steps }} steps · batch {{ sft.batch_size }} · grad_accum {{ sft.grad_accum_steps }}</td></tr>
+  <tr><th>Examples</th><td>{{ sft.n_train_examples }} train / {{ sft.n_eval_examples }} eval</td></tr>
+  {% if sft.train_loss is not none %}<tr><th>Train loss</th><td>{{ "%.4f"|format(sft.train_loss) }}</td></tr>{% endif %}
+  {% if sft.eval_loss is not none %}<tr><th>Eval loss</th><td>{{ "%.4f"|format(sft.eval_loss) }}</td></tr>{% endif %}
+  {% if sft.train_runtime_s %}<tr><th>Wall clock</th><td>{{ "%.1f"|format(sft.train_runtime_s) }} s</td></tr>{% endif %}
+  <tr><th>Adapter</th><td><code>{{ sft.adapter_dir }}</code></td></tr>
+</table>
+{% else %}
+<p class="muted">No SFT metrics — see limitations.</p>
+{% endif %}
+{% if sft_limitations %}
+<details><summary>SFT limitations</summary><pre>{{ sft_limitations }}</pre></details>
+{% endif %}
+
+<h2>Evaluation</h2>
+{% if eval %}
+<table>
+  <tr><th>Runner</th><td><code>{{ eval.runner | tojson }}</code></td></tr>
+  <tr><th>Prompts</th><td>{{ eval.n_prompts }} · {{ eval.n_with_checks }} with checks</td></tr>
+  <tr><th>Pass rate</th><td>
+    {% if eval.pass_rate is not none %}
+      <span class="pill {% if eval.pass_rate >= 0.5 %}ok{% else %}warn{% endif %}">
+        {{ "%.0f%%"|format(eval.pass_rate * 100) }}
+      </span> ({{ eval.n_passed }} / {{ eval.n_with_checks }})
+    {% else %}—{% endif %}
+  </td></tr>
+  <tr><th>Avg latency</th><td>{{ eval.avg_latency_ms }} ms</td></tr>
+  <tr><th>Avg response chars</th><td>{{ eval.avg_response_chars }}</td></tr>
+</table>
+{% if plots.eval_passrate %}
+<img alt="eval pass rate" src="data:image/png;base64,{{ plots.eval_passrate }}">
+{% endif %}
+<details><summary>Sample responses</summary>
+<table>
+  <tr><th>Task</th><th>Prompt</th><th>Response</th><th>Passed</th></tr>
+  {% for r in eval.results[:10] %}
+  <tr>
+    <td>{{ r.task or '—' }}</td>
+    <td><pre>{{ r.prompt }}</pre></td>
+    <td><pre>{{ r.response }}</pre></td>
+    <td>
+      {% if r.passed %}<span class="pill ok">pass</span>
+      {% else %}<span class="pill bad">fail</span>{% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</details>
+{% else %}
+<p class="muted">No eval results.</p>
+{% endif %}
+
+<h2>Generation samples</h2>
+{% if generation %}
+<table>
+  <tr><th>Checkpoint</th><td><code>{{ generation.checkpoint }}</code></td></tr>
+  <tr><th>Samples</th><td>{{ generation.samples | length }}</td></tr>
+</table>
+<details open><summary>Output (tiny pretrained GPT — expect rough English)</summary>
+<table>
+  <tr><th>Prompt</th><th>Continuation</th></tr>
+  {% for s in generation.samples %}
+  <tr><td><pre>{{ s.prompt }}</pre></td><td><pre>{{ s.continuation }}</pre></td></tr>
+  {% endfor %}
+</table>
+</details>
+{% else %}
+<p class="muted">No generation samples.</p>
+{% endif %}
+
+<h2>GPU benchmark</h2>
+{% if bench %}
+<table>
+  <tr><th>Device</th><td>{{ bench.device_name or bench.device }} · torch {{ bench.torch_version }}</td></tr>
+  {% if bench.max_reserved_bytes %}
+  <tr><th>Max VRAM during bench</th><td>{{ fmt_bytes(bench.max_reserved_bytes) }}</td></tr>
+  {% endif %}
+</table>
+{% if plots.matmul %}
+<img alt="matmul TFLOPS" src="data:image/png;base64,{{ plots.matmul }}">
+{% endif %}
+<details><summary>Matmul detail</summary>
+<table>
+  <tr><th>Size</th><th>Dtype</th><th>Iters</th><th>Time (s)</th><th>TFLOPS</th></tr>
+  {% for r in bench.matmul %}
+  <tr><td>{{ r.size }}</td><td>{{ r.dtype }}</td><td>{{ r.iters or '—' }}</td>
+      <td>{{ r.duration_s or '—' }}</td><td>{{ r.tflops or ('skipped' if r.skipped else 'err') }}</td></tr>
+  {% endfor %}
+</table>
+</details>
+{% if bench.tiny_gen %}
+<p>Tiny GPT generation: <strong>{{ bench.tiny_gen.tokens_per_s }} tok/s</strong>
+   ({{ bench.tiny_gen.new_tokens }} tokens in {{ bench.tiny_gen.duration_s }} s).</p>
+{% endif %}
+{% else %}
+<p class="muted">No benchmark JSON.</p>
+{% endif %}
+
+<h2>Limitations</h2>
+{% if limitations %}
+<pre>{{ limitations }}</pre>
+{% else %}
+<p class="muted">None recorded.</p>
+{% endif %}
+
+<hr>
+<p class="muted">Generated by <code>python -m llm_gpu_lab report</code> — see
+<a href="https://github.com/DaoyuanLi2816/llm-gpu-lab">project repository</a>.</p>
+</body>
+</html>

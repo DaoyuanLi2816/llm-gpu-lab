@@ -1,0 +1,47 @@
+{
+  "base_model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "before": [
+    {
+      "prompt": "Return a single-line JSON object with these key=value pairs.\n\nfruit=lime; color=green; city=Quito; count=7",
+      "response": "{\n  \"fruit\": \"lime\",\n  \"color\": \"green\",\n  \"city\": \"Quito\",\n  \"count\": 7\n}"
+    },
+    {
+      "prompt": "Classify the sentiment of the following sentence as 'positive' or 'negative'.\n\nWhat a great day, everything went perfectly.",
+      "response": "The sentiment of the sentence \"What a great day, everything went perfectly\" is positive."
+    },
+    {
+      "prompt": "Rewrite the following sentence in the past tense.\n\nShe reads a letter.",
+      "response": "She read a letter."
+    },
+    {
+      "prompt": "Summarize the paragraph in one short sentence.\n\nA young inventor built a small kite from paper and string. He launched it from a hill near the orchard at sunset.",
+      "response": "A young inventor built a small kite from paper and string. He launched it from a hill near the orchard at sunset."
+    },
+    {
+      "prompt": "Return a single-line JSON object with these key=value pairs.\n\nfruit=pear; name=Quinn; color=blue",
+      "response": "{\n  \"fruit\": \"pear\",\n  \"name\": \"Quinn\",\n  \"color\": \"blue\"\n}"
+    }
+  ],
+  "after": [
+    {
+      "prompt": "Return a single-line JSON object with these key=value pairs.\n\nfruit=lime; color=green; city=Quito; count=7",
+      "response": "{"
+    },
+    {
+      "prompt": "Classify the sentiment of the following sentence as 'positive' or 'negative'.\n\nWhat a great day, everything went perfectly.",
+      "response": "The"
+    },
+    {
+      "prompt": "Rewrite the following sentence in the past tense.\n\nShe reads a letter.",
+      "response": "She"
+    },
+    {
+      "prompt": "Summarize the paragraph in one short sentence.\n\nA young inventor built a small kite from paper and string. He launched it from a hill near the orchard at sunset.",
+      "response": "A,"
+    },
+    {
+      "prompt": "Return a single-line JSON object with these key=value pairs.\n\nfruit=pear; name=Quinn; color=blue",
+      "response": "{"
+    }
+  ]
+}

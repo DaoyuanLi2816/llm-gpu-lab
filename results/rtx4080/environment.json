@@ -1,0 +1,89 @@
+{
+  "timestamp_utc": "2026-05-16T08:52:55.208710+00:00",
+  "platform": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.22631",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "python_version": "3.11.15",
+    "python_implementation": "CPython"
+  },
+  "cwd": "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab",
+  "repo_root": "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab",
+  "git_commit": null,
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "numpy": "2.4.5",
+    "transformers": "5.8.1",
+    "tokenizers": "0.22.2",
+    "datasets": "4.8.5",
+    "accelerate": "1.13.0",
+    "peft": "0.19.1",
+    "trl": "1.4.0",
+    "bitsandbytes": null,
+    "safetensors": "0.7.0",
+    "pydantic": "2.13.4",
+    "typer": "0.25.1",
+    "rich": "15.0.0",
+    "pandas": "3.0.3",
+    "matplotlib": "3.10.9",
+    "jinja2": "3.1.6",
+    "psutil": "7.2.2",
+    "pynvml": "13.595.45",
+    "huggingface_hub": "1.15.0",
+    "lm_eval": null,
+    "tqdm": "4.67.3",
+    "pyyaml": "6.0.3"
+  },
+  "imports": {
+    "torch": true,
+    "transformers": true,
+    "peft": true,
+    "trl": true,
+    "bitsandbytes": false,
+    "datasets": true,
+    "tokenizers": true,
+    "lm_eval": false
+  },
+  "torch": {
+    "installed": true,
+    "version": "2.6.0+cu124",
+    "cuda_available": true,
+    "cuda_runtime_version": "12.4",
+    "cudnn_version": 90100,
+    "bf16_supported": true,
+    "device_count": 1,
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 4080",
+        "total_memory_bytes": 17170956288,
+        "total_memory_gib": 15.992,
+        "capability": "8.9",
+        "multi_processor_count": 76
+      }
+    ]
+  },
+  "nvml": {
+    "available": true,
+    "driver_version": "595.97",
+    "device_count": 1,
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 4080",
+        "total_bytes": 17171480576,
+        "free_bytes": 9985003520,
+        "used_bytes": 7186477056,
+        "total_gib": 15.992,
+        "free_gib": 9.299,
+        "used_gib": 6.693
+      }
+    ]
+  },
+  "nvidia_smi": "name, driver_version, memory.total [MiB], memory.free [MiB], memory.used [MiB]\nNVIDIA GeForce RTX 4080, 595.97, 16376 MiB, 9523 MiB, 6526 MiB",
+  "llama_cpp": {
+    "found": false
+  }
+}

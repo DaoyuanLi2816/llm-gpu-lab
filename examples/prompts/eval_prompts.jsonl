@@ -1,0 +1,12 @@
+{"id": "math_1", "task": "arithmetic", "prompt": "What is 3 plus 4? Answer with only the number.", "checks": [{"type": "numeric_equal", "expected": 7}]}
+{"id": "math_2", "task": "arithmetic", "prompt": "What is 9 minus 5? Answer with only the number.", "checks": [{"type": "numeric_equal", "expected": 4}]}
+{"id": "math_3", "task": "arithmetic", "prompt": "What is 6 times 2? Answer with only the number.", "checks": [{"type": "numeric_equal", "expected": 12}]}
+{"id": "json_1", "task": "json_format", "prompt": "Return a JSON object with a single key 'name' set to 'Alice'. Respond with only the JSON.", "checks": [{"type": "json_valid", "must_have_keys": ["name"]}, {"type": "contains_all", "substrings": ["Alice"]}]}
+{"id": "json_2", "task": "json_format", "prompt": "Return a JSON object with keys 'fruit' = 'apple' and 'count' = 3. Respond with only the JSON.", "checks": [{"type": "json_valid", "must_have_keys": ["fruit", "count"]}, {"type": "contains_all", "substrings": ["apple", "3"]}]}
+{"id": "rewrite_1", "task": "rewrite_past_tense", "prompt": "Rewrite this in the past tense: 'She walks to the store.' Respond with one short sentence.", "checks": [{"type": "contains_all", "substrings": ["walked"]}]}
+{"id": "rewrite_2", "task": "rewrite_past_tense", "prompt": "Rewrite this in the past tense: 'He paints a picture.' Respond with one short sentence.", "checks": [{"type": "contains_all", "substrings": ["painted"]}]}
+{"id": "summarize_1", "task": "summarize", "prompt": "Summarize this in one sentence: 'A small fox lived in the woods. Every morning the fox visited the river to drink.' Respond with one sentence only.", "checks": [{"type": "contains_all", "substrings": ["fox"]}]}
+{"id": "sentiment_1", "task": "sentiment", "prompt": "Classify the sentiment of this sentence as 'positive' or 'negative': 'I love this book, it is wonderful.' Respond with only one word.", "checks": [{"type": "contains_all", "substrings": ["positive"]}]}
+{"id": "sentiment_2", "task": "sentiment", "prompt": "Classify the sentiment of this sentence as 'positive' or 'negative': 'I dislike this book, it is boring.' Respond with only one word.", "checks": [{"type": "contains_all", "substrings": ["negative"]}]}
+{"id": "fact_1", "task": "factual", "prompt": "What color is the sky on a clear day? Answer with one word.", "checks": [{"type": "regex_match", "pattern": "(?i)blue"}]}
+{"id": "greet_1", "task": "instruction_following", "prompt": "Say hello to Maya in one short sentence that contains her name.", "checks": [{"type": "contains_all", "substrings": ["Maya"]}]}

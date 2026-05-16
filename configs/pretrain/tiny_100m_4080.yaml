@@ -1,0 +1,46 @@
+name: tiny_100m_4080
+
+# An extended experiment config. Not part of the default smoke. Expect this to
+# take 30+ minutes on an RTX 4080 with TinyStories-class data and ~100 M params.
+# The synthetic corpus is too small to give meaningful loss reductions at this
+# size; we recommend switching `data.source` to `tinystories`.
+
+tokenizer:
+  vocab_size: 16384
+  output_path: artifacts/tokenizers/tiny_tokenizer_100m.json
+  min_frequency: 2
+  special_tokens: ["<pad>", "<bos>", "<eos>", "<unk>"]
+
+data:
+  source: tinystories
+  n_examples: 250000
+  seed: 1337
+  max_length: 512
+  tinystories_revision: null
+
+model:
+  n_layer: 12
+  n_head: 12
+  n_embd: 768
+  block_size: 512
+  dropout: 0.1
+  bias: false
+  tie_weights: true
+
+train:
+  out_dir: artifacts/checkpoints/tiny_100m_4080
+  metrics_dir: results/rtx4080
+  max_steps: 8000
+  eval_every: 500
+  log_every: 50
+  batch_size: 24
+  grad_accum_steps: 2
+  lr: 3.0e-4
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  grad_clip: 1.0
+  warmup_steps: 400
+  seed: 1337
+  precision: auto
+  eval_iters: 80
+  save_safetensors: true

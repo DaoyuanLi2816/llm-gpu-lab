@@ -1,0 +1,218 @@
+{
+  "name": "smoke_eval",
+  "runner": {
+    "runner": "transformers",
+    "base_model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "adapter_path": "artifacts/adapters/smollm2_135m_lora_fallback/adapter"
+  },
+  "n_prompts": 12,
+  "n_with_checks": 12,
+  "n_passed": 6,
+  "pass_rate": 0.5,
+  "avg_latency_ms": 1470.12,
+  "avg_response_chars": 89.08,
+  "results": [
+    {
+      "id": "math_1",
+      "task": "arithmetic",
+      "prompt": "What is 3 plus 4? Answer with only the number.",
+      "response": "3 + 4 = 7",
+      "passed": false,
+      "checks": [
+        {
+          "type": "numeric_equal",
+          "passed": false,
+          "note": "got=3.0"
+        }
+      ],
+      "latency_ms": 963.04,
+      "response_chars": 9
+    },
+    {
+      "id": "math_2",
+      "task": "arithmetic",
+      "prompt": "What is 9 minus 5? Answer with only the number.",
+      "response": "To find the answer to the question \"What is 9 minus 5?\", we need to perform the arithmetic operation on the given numbers.\n\n9 - 5 = 4\n\nSo, the answer to the question \"What is 9 minus 5?\" is 4.",
+      "passed": false,
+      "checks": [
+        {
+          "type": "numeric_equal",
+          "passed": false,
+          "note": "got=9.0"
+        }
+      ],
+      "latency_ms": 2577.07,
+      "response_chars": 192
+    },
+    {
+      "id": "math_3",
+      "task": "arithmetic",
+      "prompt": "What is 6 times 2? Answer with only the number.",
+      "response": "6 times 2 is 12.",
+      "passed": false,
+      "checks": [
+        {
+          "type": "numeric_equal",
+          "passed": false,
+          "note": "got=6.0"
+        }
+      ],
+      "latency_ms": 841.21,
+      "response_chars": 16
+    },
+    {
+      "id": "json_1",
+      "task": "json_format",
+      "prompt": "Return a JSON object with a single key 'name' set to 'Alice'. Respond with only the JSON.",
+      "response": "```python\nimport json\n\ndef get_json_object(json_string):\n    data = json.loads(json_string)\n    return data\n\njson_string = \"Alice is a student.\"\ndata = get_json_object(json_string)\nprint(data)\n```\n\nThis function uses the `json` module to parse the JSON string and convert it to a Python dictionary. The `json.loads()` function is used",
+      "passed": false,
+      "checks": [
+        {
+          "type": "json_valid",
+          "passed": false,
+          "note": "response is not valid JSON"
+        },
+        {
+          "type": "contains_all",
+          "passed": true,
+          "note": "ok"
+        }
+      ],
+      "latency_ms": 5309.27,
+      "response_chars": 334
+    },
+    {
+      "id": "json_2",
+      "task": "json_format",
+      "prompt": "Return a JSON object with keys 'fruit' = 'apple' and 'count' = 3. Respond with only the JSON.",
+      "response": "```python\nimport json\n\nfruit = 'apple'\ncount = 3\n\njson_object = {\n    'fruit': fruit,\n    'count': count\n}\n\nprint(json_object)\n```\n\nOutput:\n```python\n{\n    'fruit': 'apple',\n    'count': 3\n}\n```",
+      "passed": false,
+      "checks": [
+        {
+          "type": "json_valid",
+          "passed": false,
+          "note": "response is not valid JSON"
+        },
+        {
+          "type": "contains_all",
+          "passed": true,
+          "note": "ok"
+        }
+      ],
+      "latency_ms": 3922.44,
+      "response_chars": 194
+    },
+    {
+      "id": "rewrite_1",
+      "task": "rewrite_past_tense",
+      "prompt": "Rewrite this in the past tense: 'She walks to the store.' Respond with one short sentence.",
+      "response": "She walked to the store.",
+      "passed": true,
+      "checks": [
+        {
+          "type": "contains_all",
+          "passed": true,
+          "note": "ok"
+        }
+      ],
+      "latency_ms": 367.23,
+      "response_chars": 24
+    },
+    {
+      "id": "rewrite_2",
+      "task": "rewrite_past_tense",
+      "prompt": "Rewrite this in the past tense: 'He paints a picture.' Respond with one short sentence.",
+      "response": "He paints a picture.",
+      "passed": false,
+      "checks": [
+        {
+          "type": "contains_all",
+          "passed": false,
+          "note": "missing: ['painted']"
+        }
+      ],
+      "latency_ms": 257.47,
+      "response_chars": 20
+    },
+    {
+      "id": "summarize_1",
+      "task": "summarize",
+      "prompt": "Summarize this in one sentence: 'A small fox lived in the woods. Every morning the fox visited the river to drink.' Respond with one sentence only.",
+      "response": "The small fox lived in the woods and drank from the river every morning.",
+      "passed": true,
+      "checks": [
+        {
+          "type": "contains_all",
+          "passed": true,
+          "note": "ok"
+        }
+      ],
+      "latency_ms": 653.57,
+      "response_chars": 72
+    },
+    {
+      "id": "sentiment_1",
+      "task": "sentiment",
+      "prompt": "Classify the sentiment of this sentence as 'positive' or 'negative': 'I love this book, it is wonderful.' Respond with only one word.",
+      "response": "The sentiment of this sentence is positive.",
+      "passed": true,
+      "checks": [
+        {
+          "type": "contains_all",
+          "passed": true,
+          "note": "ok"
+        }
+      ],
+      "latency_ms": 361.53,
+      "response_chars": 43
+    },
+    {
+      "id": "sentiment_2",
+      "task": "sentiment",
+      "prompt": "Classify the sentiment of this sentence as 'positive' or 'negative': 'I dislike this book, it is boring.' Respond with only one word.",
+      "response": "The sentiment of this sentence is 'negative'.",
+      "passed": true,
+      "checks": [
+        {
+          "type": "contains_all",
+          "passed": true,
+          "note": "ok"
+        }
+      ],
+      "latency_ms": 400.69,
+      "response_chars": 45
+    },
+    {
+      "id": "fact_1",
+      "task": "factual",
+      "prompt": "What color is the sky on a clear day? Answer with one word.",
+      "response": "The sky on a clear day is usually a deep, deep blue.",
+      "passed": true,
+      "checks": [
+        {
+          "type": "regex_match",
+          "passed": true,
+          "note": "ok"
+        }
+      ],
+      "latency_ms": 971.91,
+      "response_chars": 52
+    },
+    {
+      "id": "greet_1",
+      "task": "instruction_following",
+      "prompt": "Say hello to Maya in one short sentence that contains her name.",
+      "response": "Maya is a helpful AI assistant named SmolLM, trained by Hugging Face",
+      "passed": true,
+      "checks": [
+        {
+          "type": "contains_all",
+          "passed": true,
+          "note": "ok"
+        }
+      ],
+      "latency_ms": 1015.98,
+      "response_chars": 68
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+name: tiny_30m_4080
+
+tokenizer:
+  vocab_size: 8192
+  output_path: artifacts/tokenizers/tiny_tokenizer_30m.json
+  min_frequency: 2
+  special_tokens: ["<pad>", "<bos>", "<eos>", "<unk>"]
+
+data:
+  source: synthetic
+  n_examples: 20000
+  seed: 1337
+  max_length: 256
+
+model:
+  n_layer: 6
+  n_head: 8
+  n_embd: 384
+  block_size: 256
+  dropout: 0.05
+  bias: false
+  tie_weights: true
+
+train:
+  out_dir: artifacts/checkpoints/tiny_30m_4080
+  metrics_dir: results/rtx4080
+  max_steps: 2000
+  eval_every: 200
+  log_every: 25
+  batch_size: 32
+  grad_accum_steps: 1
+  lr: 3.0e-4
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  grad_clip: 1.0
+  warmup_steps: 100
+  seed: 1337
+  precision: auto
+  eval_iters: 40
+  save_safetensors: true

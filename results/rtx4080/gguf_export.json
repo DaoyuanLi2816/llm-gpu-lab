@@ -1,0 +1,35 @@
+{
+  "name": "gguf_q4_k_m",
+  "base_model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "adapter_path": "artifacts/adapters/smollm2_135m_lora_fallback/adapter",
+  "merged_dir": "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\artifacts\\merged\\smollm2_135m_lora",
+  "gguf_out_dir": "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\artifacts\\gguf",
+  "quant_type": "Q4_K_M",
+  "steps": [
+    {
+      "name": "merge_lora",
+      "ok": true,
+      "merged_dir": "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\artifacts\\merged\\smollm2_135m_lora"
+    },
+    {
+      "cmd": [
+        "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\external\\llama.cpp\\convert_hf_to_gguf.py",
+        "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\artifacts\\merged\\smollm2_135m_lora",
+        "--outfile",
+        "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\artifacts\\gguf\\smollm2_135m_lora.f16.gguf",
+        "--outtype",
+        "f16"
+      ],
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "FO:hf-to-gguf:output_norm.weight,          torch.float16 --> F32, shape = {576}\nINFO:hf-to-gguf:Set meta model\nINFO:hf-to-gguf:Set model parameters\nINFO:hf-to-gguf:gguf: context length = 8192\nINFO:hf-to-gguf:gguf: embedding length = 576\nINFO:hf-to-gguf:gguf: feed forward length = 1536\nINFO:hf-to-gguf:gguf: head count = 9\nINFO:hf-to-gguf:gguf: key-value head count = 3\nWARNING:hf-to-gguf:Unknown RoPE type: default\nINFO:hf-to-gguf:gguf: rope scaling type = NONE\nINFO:hf-to-gguf:gguf: rope theta = 100000\nINFO:hf-to-gguf:gguf: rms norm epsilon = 1e-05\nINFO:hf-to-gguf:gguf: file type = 1\nINFO:hf-to-gguf:Set model quantization version\nINFO:hf-to-gguf:Set model tokenizer\nINFO:gguf.vocab:Adding 48900 merge(s).\nINFO:gguf.vocab:Setting special token type bos to 1\nINFO:gguf.vocab:Setting special token type eos to 2\nINFO:gguf.vocab:Setting special token type unk to 0\nINFO:gguf.vocab:Setting special token type pad to 2\nINFO:gguf.vocab:Setting chat_template to {% for message in messages %}{% if loop.first and messages[0]['role'] != 'system' %}{{ '<|im_start|>system\nYou are a helpful AI assistant named SmolLM, trained by Hugging Face<|im_end|>\n' }}{% endif %}{{'<|im_start|>' + message['role'] + '\n' + message['content'] + '<|im_end|>' + '\n'}}{% endfor %}{% if add_generation_prompt %}{{ '<|im_start|>assistant\n' }}{% endif %}\nINFO:gguf.gguf_writer:Writing the following files:\nINFO:gguf.gguf_writer:C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\artifacts\\gguf\\smollm2_135m_lora.f16.gguf: n_tensors = 272, total_size = 269.1M\n\nWriting:   0%|          | 0.00/269M [00:00<?, ?byte/s]\nWriting:  21%|\u2588\u2588        | 56.6M/269M [00:00<00:01, 191Mbyte/s]\nWriting:  76%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258c  | 204M/269M [00:00<00:00, 255Mbyte/s] \nWriting:  92%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u258f| 247M/269M [00:00<00:00, 283Mbyte/s]\nWriting: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 269M/269M [00:00<00:00, 287Mbyte/s]\nINFO:hf-to-gguf:Model successfully exported to C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\artifacts\\gguf\\smollm2_135m_lora.f16.gguf\n",
+      "duration_s": 4.32,
+      "name": "convert_to_f16_gguf"
+    }
+  ],
+  "success": true,
+  "gguf_files": [
+    "C:\\Users\\14191\\OneDrive\\Documents\\New project\\Git\\llm-gpu-lab\\artifacts\\gguf\\smollm2_135m_lora.f16.gguf"
+  ]
+}

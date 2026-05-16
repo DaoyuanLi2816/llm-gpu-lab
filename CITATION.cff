@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: "llm-gpu-lab: One GPU. Full LLM workflow. Real benchmarks. No cloud required."
+message: "If you use this software in your work, please cite it as below."
+type: software
+authors:
+  - name: "llm-gpu-lab contributors"
+repository-code: "https://github.com/DaoyuanLi2816/llm-gpu-lab"
+license: Apache-2.0
+keywords:
+  - llm
+  - gpu
+  - pytorch
+  - transformers
+  - peft
+  - lora
+  - qlora
+  - gguf
+  - llama.cpp
+abstract: >-
+  An educational and engineering reference repository that lets a developer with
+  one local consumer NVIDIA GPU (RTX 4080 class, 16 GB) run a complete LLM
+  workflow locally: environment diagnosis, tokenizer training, tiny GPT
+  pretraining, generation, LoRA / QLoRA SFT, evaluation, GGUF / llama.cpp
+  export, GPU benchmarking, and a reproducible HTML report.

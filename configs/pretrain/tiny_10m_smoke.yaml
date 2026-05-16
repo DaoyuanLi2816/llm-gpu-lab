@@ -1,0 +1,40 @@
+name: tiny_10m_smoke
+
+tokenizer:
+  vocab_size: 4096
+  output_path: artifacts/tokenizers/tiny_tokenizer.json
+  min_frequency: 2
+  special_tokens: ["<pad>", "<bos>", "<eos>", "<unk>"]
+
+data:
+  source: synthetic
+  n_examples: 3000
+  seed: 1337
+  max_length: 128
+
+model:
+  n_layer: 4
+  n_head: 4
+  n_embd: 128
+  block_size: 128
+  dropout: 0.0
+  bias: false
+  tie_weights: true
+
+train:
+  out_dir: artifacts/checkpoints/tiny_10m_smoke
+  metrics_dir: results/rtx4080
+  max_steps: 200
+  eval_every: 50
+  log_every: 10
+  batch_size: 16
+  grad_accum_steps: 1
+  lr: 3.0e-4
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  grad_clip: 1.0
+  warmup_steps: 20
+  seed: 1337
+  precision: auto
+  eval_iters: 20
+  save_safetensors: true
