@@ -6,6 +6,8 @@
 
 > **One GPU. Full LLM workflow. Real benchmarks. No cloud required.**
 
+![llm-gpu-lab architecture](docs/architecture.png)
+
 `llm-gpu-lab` is a hands-on, end-to-end LLM toolkit you can run on a single
 NVIDIA GPU. It walks you from "I have a 4080 and curiosity" to a fine-tuned
 small LLM, a GGUF deployment, and a self-contained HTML benchmark report —
@@ -35,8 +37,6 @@ If you already know all of those, this is also a clean, opinionated
 template you can extend.
 
 ## Architecture
-
-![llm-gpu-lab architecture](docs/architecture.png)
 
 Two parallel paths share the tokenizer + eval + benchmark + report
 infrastructure: a from-scratch **TinyGPT pretraining** path (top) and an
