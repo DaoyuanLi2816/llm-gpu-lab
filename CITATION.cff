@@ -3,7 +3,9 @@ title: "llm-gpu-lab: One GPU. Full LLM workflow. Real benchmarks. No cloud requi
 message: "If you use this software in your work, please cite it as below."
 type: software
 authors:
-  - name: "llm-gpu-lab contributors"
+  - family-names: Li
+    given-names: Daoyuan
+    email: lidaoyuan2816@gmail.com
 repository-code: "https://github.com/DaoyuanLi2816/llm-gpu-lab"
 license: Apache-2.0
 keywords:
