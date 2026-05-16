@@ -1,6 +1,7 @@
 # llm-gpu-lab
 
 [![CI](https://github.com/DaoyuanLi2816/llm-gpu-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/DaoyuanLi2816/llm-gpu-lab/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/llm-gpu-lab.svg)](https://pypi.org/project/llm-gpu-lab/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
@@ -55,7 +56,11 @@ source .venv/Scripts/activate
 # 2. Install PyTorch with the CUDA wheel that matches your driver
 pip install --index-url https://download.pytorch.org/whl/cu124 "torch>=2.4"
 
-# 3. Install the project
+# 3a. Install from PyPI (most users)
+pip install "llm-gpu-lab[nlp,hub]"
+
+# 3b. ...or from source if you want to hack on it
+git clone https://github.com/DaoyuanLi2816/llm-gpu-lab && cd llm-gpu-lab
 pip install -e ".[dev,nlp,hub]"
 
 # 4. Verify the environment
