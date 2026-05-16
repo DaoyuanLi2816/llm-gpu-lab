@@ -51,7 +51,6 @@ META_FILES=(
   "docs/quickstart.md"
   "docs/design.md"
   "docs/troubleshooting.md"
-  "docs/ip_safety.md"
   "docs/licenses.md"
   "docs/results.md"
 )

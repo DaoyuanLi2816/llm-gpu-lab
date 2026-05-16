@@ -9,8 +9,6 @@ for running a complete LLM workflow on a single consumer NVIDIA GPU.
   inference (OpenAI / Anthropic / Gemini / etc.) for the core pipeline.
 - Public open datasets and open model weights are welcome. Document their
   license in `docs/licenses.md` and never commit downloaded weights.
-- No private data, no company-internal code, no recommendation-system content.
-  See `docs/ip_safety.md`.
 - Benchmark numbers in docs **must** come from real runs and committed
   `results/rtx4080/*.json` artifacts. Do not paste fake numbers.
 

@@ -158,20 +158,13 @@ llm-gpu-lab/
 ├── configs/                # YAML configs for pretrain / sft / eval / export
 ├── scripts/                # Shell helpers (setup_env, setup_llamacpp, smoke)
 ├── examples/prompts/       # eval prompts (jsonl) + generation prompts (txt)
-├── docs/                   # quickstart, design, troubleshooting, IP safety, …
+├── docs/                   # quickstart, design, troubleshooting, licenses, …
 ├── tests/                  # pytest suite (CPU-friendly, GPU tests auto-skip)
 ├── results/rtx4080/        # committed JSON / HTML artifacts from real runs
 ├── pyproject.toml          # Python project metadata + ruff + pytest config
 ├── Makefile                # `make smoke`, `make test`, `make lint`, …
 └── .github/workflows/ci.yml# CPU-only CI (lint + tests + audit)
 ```
-
-## Safety / IP
-
-This repository is built in the open from public knowledge and public
-open models. It does not contain employer-internal code, datasets, or
-metrics, and it does not include any recommendation-system content. See
-[`docs/ip_safety.md`](docs/ip_safety.md) for the full statement.
 
 ## License
 
