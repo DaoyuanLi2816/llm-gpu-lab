@@ -327,12 +327,14 @@ def _train_loop(
     optimizer = torch.optim.AdamW(trainable, lr=cfg.lr, betas=(0.9, 0.95), weight_decay=0.0)
 
     total_steps = cfg.max_steps
-    warmup_steps = max(1, int(cfg.warmup_ratio * total_steps))
+    accum = max(1, cfg.grad_accum_steps)
+    sched_total = max(1, math.ceil(total_steps / accum))
+    warmup_steps = max(1, int(cfg.warmup_ratio * sched_total))
 
     def _lr(step: int) -> float:
         if step < warmup_steps:
             return cfg.lr * (step + 1) / warmup_steps
-        progress = (step - warmup_steps) / max(1, total_steps - warmup_steps)
+        progress = (step - warmup_steps) / max(1, sched_total - warmup_steps)
         progress = min(1.0, max(0.0, progress))
         return cfg.lr * (0.1 + 0.9 * 0.5 * (1.0 + math.cos(math.pi * progress)))
 
@@ -349,7 +351,6 @@ def _train_loop(
     step = 0
     losses: List[float] = []
     t_start = time.time()
-    accum = cfg.grad_accum_steps
     log_every = max(1, total_steps // 10)
 
     optimizer.zero_grad(set_to_none=True)
