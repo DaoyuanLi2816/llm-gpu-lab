@@ -38,8 +38,6 @@ jobs:
         run: python -m ruff check .
 
       - name: Pytest (CPU-only; GPU tests auto-skipped)
-        env:
-          LLM_GPU_LAB_NO_DOWNLOAD: "1"
         run: python -m pytest -q
 
       - name: Placeholder audit
