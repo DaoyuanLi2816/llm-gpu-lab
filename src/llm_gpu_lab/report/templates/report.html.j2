@@ -75,15 +75,15 @@ was honestly recorded as a limitation.</p>
   <tr><th>Model</th><td>
     {{ pretrain.model.n_layer }} layers · {{ pretrain.model.n_head }} heads · embed {{ pretrain.model.n_embd }} ·
     block {{ pretrain.model.block_size }} · vocab {{ pretrain.model.vocab_size }} ·
-    {{ "%.2f"|format(pretrain.model.num_params / 1e6) }} M params
+    {% if pretrain.model.num_params is not none %}{{ "%.2f"|format(pretrain.model.num_params / 1e6) }}{% else %}-{% endif %} M params
   </td></tr>
   <tr><th>Steps</th><td>{{ pretrain.results.steps }}</td></tr>
   <tr><th>First → last loss</th><td>
-    {{ "%.4f"|format(pretrain.results.first_loss) }} →
-    {{ "%.4f"|format(pretrain.results.last_loss) }}
-    (min {{ "%.4f"|format(pretrain.results.min_loss) }})
+    {% if pretrain.results.first_loss is not none %}{{ "%.4f"|format(pretrain.results.first_loss) }}{% else %}-{% endif %} →
+    {% if pretrain.results.last_loss is not none %}{{ "%.4f"|format(pretrain.results.last_loss) }}{% else %}-{% endif %}
+    (min {% if pretrain.results.min_loss is not none %}{{ "%.4f"|format(pretrain.results.min_loss) }}{% else %}-{% endif %})
   </td></tr>
-  <tr><th>Final eval loss</th><td>{{ "%.4f"|format(pretrain.results.final_eval_loss) }}</td></tr>
+  <tr><th>Final eval loss</th><td>{% if pretrain.results.final_eval_loss is not none %}{{ "%.4f"|format(pretrain.results.final_eval_loss) }}{% else %}-{% endif %}</td></tr>
   <tr><th>Wall clock</th><td>{{ pretrain.results.wall_clock_s }} s</td></tr>
   <tr><th>Tokens / s</th><td>{{ pretrain.results.tokens_per_s }}</td></tr>
   <tr><th>Max VRAM (torch reserved)</th><td>{{ fmt_bytes(pretrain.telemetry_summary.max_torch_reserved_bytes) }}</td></tr>
