@@ -231,31 +231,37 @@ def run_pretrain(cfg: PretrainYAML) -> Dict[str, Any]:
     model.train()
     step = 0
     final_eval = None
+    accum = max(1, cfg.train.grad_accum_steps)
     while step < cfg.train.max_steps:
-        x, y = _make_batch(train_pack, cfg.train.batch_size, cfg.model.block_size, rng)
-        x, y = x.to(device), y.to(device)
         lr = _lr_schedule(step, cfg.train.warmup_steps, cfg.train.max_steps, cfg.train.lr)
         for pg in optimizer.param_groups:
             pg["lr"] = lr
 
         t0 = time.time()
-        with amp_ctx:
-            _, loss = model(x, y)
-
         optimizer.zero_grad(set_to_none=True)
+        micro_losses = []
+        for _ in range(accum):
+            x, y = _make_batch(train_pack, cfg.train.batch_size, cfg.model.block_size, rng)
+            x, y = x.to(device), y.to(device)
+            with amp_ctx:
+                _, loss = model(x, y)
+            micro_losses.append(float(loss.detach().cpu().item()))
+            loss = loss / accum
+            if scaler is not None:
+                scaler.scale(loss).backward()
+            else:
+                loss.backward()
         if scaler is not None:
-            scaler.scale(loss).backward()
             scaler.unscale_(optimizer)
             torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.train.grad_clip)
             scaler.step(optimizer)
             scaler.update()
         else:
-            loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.train.grad_clip)
             optimizer.step()
 
         dt = time.time() - t0
-        loss_val = float(loss.detach().cpu().item())
+        loss_val = float(np.mean(micro_losses))
         train_losses.append(loss_val)
 
         if (step + 1) % cfg.train.log_every == 0 or step == 0:
@@ -272,7 +278,7 @@ def run_pretrain(cfg: PretrainYAML) -> Dict[str, Any]:
                             "loss": loss_val,
                             "lr": lr,
                             "dt_s": dt,
-                            "tokens_per_step": cfg.train.batch_size * cfg.model.block_size,
+                            "tokens_per_step": cfg.train.batch_size * cfg.model.block_size * accum,
                             "telemetry": snap.to_dict(),
                         }
                     )
