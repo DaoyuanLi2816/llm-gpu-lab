@@ -9,7 +9,7 @@ Usage:
 ```bash
 pip install lm-eval
 python -m llm_gpu_lab lm-eval --base-model HuggingFaceTB/SmolLM2-135M-Instruct \
-    --tasks arc_easy --limit 20 --out results/rtx4080/lm_eval_results.json
+    --task arc_easy --limit 20 --out results/rtx4080/lm_eval_results.json
 ```
 """
 

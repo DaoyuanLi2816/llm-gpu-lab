@@ -83,7 +83,7 @@ def cmd_generate(
         "--prompts",
         help="Optional text file with one prompt per line. Falls back to default prompts.",
     ),
-    prompt: Optional[str] = typer.Option(None, "--prompt", help="A single prompt (overrides --prompts)."),
+    prompt: Optional[str] = typer.Option(None, "--prompt", help="A single prompt; mutually exclusive with --prompts."),
     out: Path = typer.Option(
         ROOT / "results" / "rtx4080" / "generation_samples.json",
         "--out",
