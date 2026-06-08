@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><style>
+  :root{--bg:#0b1220;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#7c8aa5;
+        --data:#6366f1;--tok:#0ea5e9;--train:#f43f5e;--eval:#10b981;--exp:#f59e0b;--serve:#8b5cf6;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1180px;height:600px}
+  body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+       background:radial-gradient(1300px 720px at 20% -12%,#1c2740 0%,var(--bg) 58%);
+       color:#e2e8f0;padding:34px 44px 26px}
+  h1{font-size:29px;font-weight:800}.h1a{color:#38bdf8}
+  .sub{color:#94a3b8;font-size:14.5px;margin-top:5px;margin-bottom:26px}
+  .row{display:flex;align-items:stretch;gap:0;justify-content:center}
+  .chip{flex:1;background:#fff;color:var(--ink);border-radius:13px;padding:13px 12px;text-align:center;
+        box-shadow:0 12px 26px rgba(2,6,23,.5),0 2px 5px rgba(2,6,23,.32);border-top:4px solid var(--data)}
+  .chip .ct{font-size:15px;font-weight:700}
+  .chip .cd{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.45}
+  .c2{border-top-color:var(--tok)}.c3{border-top-color:var(--train)}
+  .c4{border-top-color:var(--eval)}.c5{border-top-color:var(--exp)}.c6{border-top-color:var(--serve)}
+  .chip.big{transform:scale(1.06);z-index:2}
+  .star{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--train);color:#fff;
+        font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .chip.big{position:relative}
+  .a{display:flex;align-items:center;justify-content:center;color:var(--line);width:34px;flex:0 0 34px}
+  .a svg{width:22px;height:22px}
+  .av{display:flex;justify-content:center;color:var(--line);margin:14px 0 0}.av svg{width:24px;height:24px}
+  .bar{margin-top:26px;border:1.5px dashed #3b4a66;background:rgba(148,163,184,.05);border-radius:16px;
+       padding:14px 18px;display:flex;align-items:center;gap:16px;position:relative}
+  .bar>.bt{position:absolute;top:-11px;left:18px;background:#22d3ee;color:#04222f;font-size:11px;font-weight:800;
+           letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+  .bar .bd{font-size:13px;color:#cbd5e1}.bar .bd b{color:#fff}
+  .bar .pill{margin-left:auto;background:#334155;color:#e2e8f0;border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700}
+  .mono{font-family:"Cascadia Code",Consolas,monospace}
+  .out{margin-top:16px;display:flex;justify-content:center}
+  .rep{background:#fff;color:var(--ink);border-radius:13px;padding:12px 22px;border-top:4px solid var(--exp);
+       box-shadow:0 12px 26px rgba(2,6,23,.5);text-align:center}
+  .rep .t{font-size:15px;font-weight:700}.rep .d{font-size:11.5px;color:var(--muted);margin-top:3px}
+</style></head>
+<body>
+  <h1>llm&#8209;gpu&#8209;lab <span class="h1a">&mdash; pretrain &middot; fine&#8209;tune &middot; eval &middot; export on one GPU</span></h1>
+  <div class="sub">An end&#8209;to&#8209;end small&#8209;LLM workflow sized for a single RTX&nbsp;4080, instrumented throughout.</div>
+
+  <div class="row">
+    <div class="chip"><div class="ct">Data</div><div class="cd">tiny corpus<br>TinyStories &middot; synthetic</div></div>
+    <div class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+    <div class="chip c2"><div class="ct">Tokenize</div><div class="cd">train BPE<br>packing</div></div>
+    <div class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+    <div class="chip c3 big"><span class="star">core</span><div class="ct">Train</div><div class="cd">pretrain (TinyGPT)<br>SFT &middot; LoRA / QLoRA</div></div>
+    <div class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+    <div class="chip c4"><div class="ct">Eval</div><div class="cd">basic metrics<br>lm&#8209;eval bridge</div></div>
+    <div class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+    <div class="chip c5"><div class="ct">Export</div><div class="cd">merge LoRA<br>GGUF (q4)</div></div>
+    <div class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+    <div class="chip c6"><div class="ct">Serve</div><div class="cd">llama.cpp<br>local run</div></div>
+  </div>
+
+  <div class="bar"><span class="bt">instrumented</span>
+    <div class="bd"><b>Telemetry &amp; benchmarks</b> &mdash; VRAM usage &middot; tokens/sec &middot; OOM probes, captured across every stage above</div>
+    <span class="pill">RTX 4080 / 16 GB</span>
+  </div>
+
+  <div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg></div>
+  <div class="out"><div class="rep"><div class="t">HTML report</div><div class="d">metrics &middot; loss curves &middot; before/after samples &middot; GGUF export summary</div></div></div>
+</body></html>
