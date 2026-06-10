@@ -13,7 +13,7 @@
 
 > **One GPU. Full LLM workflow. Real benchmarks. No cloud required.**
 
-![llm-gpu-lab architecture](docs/architecture.png)
+![llm-gpu-lab architecture](https://raw.githubusercontent.com/DaoyuanLi2816/llm-gpu-lab/main/docs/architecture.png)
 
 `llm-gpu-lab` is a hands-on, end-to-end LLM toolkit you can run on a single
 NVIDIA GPU. It walks you from "I have a 4080 and curiosity" to a fine-tuned
