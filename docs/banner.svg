@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 250" role="img" aria-label="llm-gpu-lab — one GPU, full LLM workflow, real benchmarks">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c0a09"/>
+      <stop offset="55%" stop-color="#1c1917"/>
+      <stop offset="100%" stop-color="#7c2d12"/>
+    </linearGradient>
+    <clipPath id="bgclip">
+      <rect x="0" y="0" width="880" height="250" rx="16"/>
+    </clipPath>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="250" rx="16" fill="url(#bg)"/>
+  <g clip-path="url(#bgclip)">
+    <circle cx="790" cy="0" r="190" fill="#fb923c" opacity="0.07"/>
+    <circle cx="350" cy="265" r="150" fill="#fbbf24" opacity="0.05"/>
+  </g>
+
+  <!-- ===== left column: brand ===== -->
+  <text x="40" y="84" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="800" fill="#ffffff">llm-gpu-lab</text>
+  <rect x="42" y="94" width="64" height="3" rx="1.5" fill="#fb923c" opacity="0.9"/>
+  <text x="40" y="124" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14.5" fill="#cbd5e1">One GPU. Full LLM workflow. Real benchmarks.</text>
+
+  <!-- stage chips -->
+  <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" text-anchor="middle">
+    <rect x="40" y="140" width="70" height="24" rx="12" fill="#34d399" fill-opacity="0.12" stroke="#34d399" stroke-opacity="0.65"/>
+    <text x="75" y="156" fill="#6ee7b7">pretrain</text>
+    <rect x="118" y="140" width="70" height="24" rx="12" fill="#60a5fa" fill-opacity="0.12" stroke="#60a5fa" stroke-opacity="0.65"/>
+    <text x="153" y="156" fill="#93c5fd">finetune</text>
+    <rect x="196" y="140" width="54" height="24" rx="12" fill="#fbbf24" fill-opacity="0.12" stroke="#fbbf24" stroke-opacity="0.65"/>
+    <text x="223" y="156" fill="#fde68a">serve</text>
+  </g>
+
+  <!-- context pill -->
+  <rect x="40" y="178" width="232" height="28" rx="14" fill="#fb923c" fill-opacity="0.10" stroke="#fb923c" stroke-opacity="0.55"/>
+  <text x="54" y="196" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#fdba74">every number from a JSON artifact</text>
+
+  <!-- pip install pill -->
+  <rect x="40" y="214" width="204" height="26" rx="13" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.18"/>
+  <text x="54" y="231" font-family="ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace" font-size="12.5" fill="#e2e8f0">$ pip install llm-gpu-lab</text>
+
+  <!-- ===== card 1: from-scratch pipeline ===== -->
+  <g>
+    <rect x="350" y="30" width="156" height="190" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.13"/>
+    <circle cx="380" cy="62" r="16" fill="#38bdf8" fill-opacity="0.14" stroke="#38bdf8" stroke-opacity="0.55" stroke-width="1.4"/>
+    <g stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M 374 56 L 380 62 L 374 68"/>
+      <path d="M 382 56 L 388 62 L 382 68"/>
+    </g>
+    <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+      <text x="366" y="102" font-size="14" font-weight="700" fill="#f1f5f9">From-scratch</text>
+      <text x="366" y="120" font-size="14" font-weight="700" fill="#f1f5f9">pipeline</text>
+      <text x="366" y="142" font-size="11.5" fill="#94a3b8">tokenizer &#8594; tiny GPT &#8594;</text>
+      <text x="366" y="158" font-size="11.5" fill="#94a3b8">LoRA/QLoRA SFT</text>
+      <text x="366" y="180" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">end to end on</text>
+      <text x="366" y="195" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">one 16 GB card</text>
+    </g>
+  </g>
+
+  <!-- ===== card 2: measured benchmarks ===== -->
+  <g>
+    <rect x="520" y="30" width="156" height="190" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.13"/>
+    <circle cx="550" cy="62" r="16" fill="#34d399" fill-opacity="0.14" stroke="#34d399" stroke-opacity="0.55" stroke-width="1.4"/>
+    <g stroke="#34d399" stroke-width="1.8" stroke-linecap="round" fill="none">
+      <path d="M 541 66 A 9 9 0 0 1 559 66"/>
+      <line x1="550" y1="66" x2="556" y2="59"/>
+    </g>
+    <circle cx="550" cy="66" r="1.6" fill="#34d399"/>
+    <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+      <text x="536" y="102" font-size="14" font-weight="700" fill="#f1f5f9">Measured</text>
+      <text x="536" y="120" font-size="14" font-weight="700" fill="#f1f5f9">benchmarks</text>
+      <text x="536" y="142" font-size="11.5" fill="#94a3b8">throughput, VRAM and</text>
+      <text x="536" y="158" font-size="11.5" fill="#94a3b8">latency &#8212; recorded</text>
+      <text x="536" y="180" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">no hand-edited</text>
+      <text x="536" y="195" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">numbers, ever</text>
+    </g>
+  </g>
+
+  <!-- ===== card 3: deploy & report ===== -->
+  <g>
+    <rect x="690" y="30" width="156" height="190" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.13"/>
+    <circle cx="720" cy="62" r="16" fill="#a78bfa" fill-opacity="0.14" stroke="#a78bfa" stroke-opacity="0.55" stroke-width="1.4"/>
+    <g stroke="#a78bfa" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <rect x="713" y="59" width="14" height="11" rx="2"/>
+      <line x1="720" y1="59" x2="720" y2="51"/>
+      <path d="M 717 54 L 720 51 L 723 54"/>
+    </g>
+    <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+      <text x="706" y="102" font-size="14" font-weight="700" fill="#f1f5f9">Deploy &amp;</text>
+      <text x="706" y="120" font-size="14" font-weight="700" fill="#f1f5f9">report</text>
+      <text x="706" y="142" font-size="11.5" fill="#94a3b8">GGUF + llama.cpp</text>
+      <text x="706" y="158" font-size="11.5" fill="#94a3b8">serving, HTML report</text>
+      <text x="706" y="180" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">fully offline,</text>
+      <text x="706" y="195" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">fully reproducible</text>
+    </g>
+  </g>
+</svg>
