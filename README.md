@@ -1,9 +1,15 @@
-# llm-gpu-lab
+<p align="center">
+  <img src="https://raw.githubusercontent.com/DaoyuanLi2816/llm-gpu-lab/main/docs/banner.svg" alt="llm-gpu-lab — one GPU, full LLM workflow, real benchmarks: from-scratch pretraining to LoRA/QLoRA fine-tuning, GGUF deployment and reproducible HTML reports." width="880">
+</p>
+
+<div align="center">
 
 [![CI](https://github.com/DaoyuanLi2816/llm-gpu-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/DaoyuanLi2816/llm-gpu-lab/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/llm-gpu-lab.svg)](https://pypi.org/project/llm-gpu-lab/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+
+</div>
 
 > **One GPU. Full LLM workflow. Real benchmarks. No cloud required.**
 
