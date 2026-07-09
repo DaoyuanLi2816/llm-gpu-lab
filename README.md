@@ -54,6 +54,11 @@ renders all of them together.
 
 ## Quickstart
 
+The smoke pipeline below (steps 4-6) drives itself entirely off the
+`configs/`, `examples/`, and `Makefile` that live in this repo — a plain
+`pip install llm-gpu-lab` has no local copy of them. Clone the repo to run
+it:
+
 ```bash
 # 1. Create a venv (uv recommended; plain python -m venv also works)
 uv venv --python 3.11 .venv
@@ -62,10 +67,7 @@ source .venv/Scripts/activate
 # 2. Install PyTorch with the CUDA wheel that matches your driver
 pip install --index-url https://download.pytorch.org/whl/cu124 "torch>=2.4"
 
-# 3a. Install from PyPI (most users)
-pip install "llm-gpu-lab[nlp,hub]"
-
-# 3b. ...or from source if you want to hack on it
+# 3. Clone and install from source
 git clone https://github.com/DaoyuanLi2816/llm-gpu-lab && cd llm-gpu-lab
 pip install -e ".[dev,nlp,hub]"
 
@@ -83,6 +85,10 @@ start   results\rtx4080\report.html      # Windows
 
 The smoke pipeline takes about **30 seconds** of compute on an RTX 4080
 plus a one-time ~270 MB Hugging Face download for SmolLM2-135M.
+
+`pip install "llm-gpu-lab[nlp,hub]"` (no clone) also works if you only want
+to call the library directly — e.g. `from llm_gpu_lab.train.sft_lora import
+run_sft` — from your own scripts with your own config objects.
 
 ## What runs on an RTX 4080
 
