@@ -6,7 +6,7 @@ The source code, configs, scripts, docs, and the synthetic data
 generators are licensed under **Apache-2.0**. See `LICENSE`.
 
 Apache-2.0 was chosen because the project links against several other
-Apache-2.0 libraries (`transformers`, `peft`, `trl`, `tokenizers`,
+Apache-2.0 libraries (`transformers`, `peft`, `tokenizers`,
 `safetensors`). Using the same licence avoids any subtle conflict at the
 combination level and makes contribution rules easy to understand. MIT
 would also have been acceptable.
@@ -18,7 +18,6 @@ would also have been acceptable.
 | `torch`        | BSD-style ("PyTorch License")                          |
 | `transformers` | Apache-2.0                                             |
 | `peft`         | Apache-2.0                                             |
-| `trl`          | Apache-2.0                                             |
 | `tokenizers`   | Apache-2.0                                             |
 | `datasets`     | Apache-2.0                                             |
 | `accelerate`   | Apache-2.0                                             |
