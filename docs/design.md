@@ -20,7 +20,7 @@ results JSON artifact.
 ┌────────────┐  ┌─────────────┐  ┌─────────────┐
 │ SmolLM /   │  │  LoRA /      │  │   basic     │
 │ Qwen base  │─▶│  QLoRA SFT   │─▶│   eval      │
-│ from HF    │  │ (PEFT/TRL)   │  │  (12 prompts)│
+│ from HF    │  │ (PEFT)       │  │  (12 prompts)│
 └────────────┘  └─────────────┘  └─────────────┘
                        │
                        ▼
