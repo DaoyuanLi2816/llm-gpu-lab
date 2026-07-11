@@ -71,7 +71,7 @@
       <text x="536" y="120" font-size="14" font-weight="700" fill="#f1f5f9">benchmarks</text>
       <text x="536" y="142" font-size="11.5" fill="#94a3b8">throughput, VRAM and</text>
       <text x="536" y="158" font-size="11.5" fill="#94a3b8">latency &#8212; recorded</text>
-      <text x="536" y="180" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">no hand-edited</text>
+      <text x="536" y="180" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">no invented</text>
       <text x="536" y="195" font-size="10.5" fill="#fcd34d" fill-opacity="0.9">numbers, ever</text>
     </g>
   </g>

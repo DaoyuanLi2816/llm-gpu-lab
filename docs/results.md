@@ -29,9 +29,17 @@ or scripts.
 
 ## What "real" means
 
-Every number in `report.html` flows from one of the JSON files above.
-None of them are mocked, hand-written, or interpolated. If a number is
-not in a JSON, it does not appear in the HTML.
+Every metric, table, and chart in `report.html` — pretrain loss, SFT
+loss, eval pass rate, GPU TFLOPS — is generated straight from the JSON
+files above; none of it is mocked or interpolated.
+
+The one exception is the report's **Limitations** section: it embeds
+`limitations.md` / `sft_limitations.md` verbatim, and those two files
+are hand-curated by whoever ran the pipeline (their own headers say so).
+That includes the GGUF file-size / bits-per-weight figures — they are
+transcribed from the quantizer's own console output, not parsed into a
+JSON field yet. Everything else in the report has no hand-written
+numbers in it.
 
 If a number disagrees with what you expect, the right next step is:
 

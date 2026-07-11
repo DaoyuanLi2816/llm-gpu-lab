@@ -20,9 +20,11 @@ NVIDIA GPU. It walks you from "I have a 4080 and curiosity" to a fine-tuned
 small LLM, a GGUF deployment, and a self-contained HTML benchmark report —
 without any paid hosted inference and without any cloud training.
 
-Every number in the report comes from a JSON artifact written on the
-machine that ran it. There are no fake screenshots, no hand-edited
-numbers, and no "expected" results substituted for measured ones.
+Every pretrain / SFT / eval / benchmark number in the report comes from
+a JSON artifact written on the machine that ran it. There are no fake
+screenshots, no invented numbers, and no "expected" results substituted
+for measured ones. (The report's Limitations section is hand-curated
+narrative by design — see [`docs/results.md`](docs/results.md).)
 
 ## Who this is for
 
@@ -45,12 +47,13 @@ template you can extend.
 
 ## Architecture
 
-Two parallel paths share the tokenizer + eval + benchmark + report
-infrastructure: a from-scratch **TinyGPT pretraining** path (top) and an
-**open-Hub model + LoRA / QLoRA SFT** path (middle), with an optional
-**GGUF export + llama.cpp serve** branch off the SFT path. Every box
-writes a JSON artifact under `results/<gpu>/`, and the final HTML report
-renders all of them together.
+Two parallel paths share the benchmark + report infrastructure: a
+from-scratch **TinyGPT pretraining** path (top, with its own trained
+BPE tokenizer) and an **open-Hub model + LoRA / QLoRA SFT** path
+(middle, using each base model's own Hugging Face tokenizer), with an
+optional **GGUF export + llama.cpp serve** branch off the SFT path.
+Every box writes a JSON artifact under `results/<gpu>/`, and the final
+HTML report renders all of them together.
 
 ## Quickstart
 
@@ -95,7 +98,7 @@ run_sft` — from your own scripts with your own config objects.
 | Step                | Config                                            | Wall clock | Notes                                          |
 |---------------------|---------------------------------------------------|------------|------------------------------------------------|
 | Pretrain (smoke)    | `configs/pretrain/tiny_10m_smoke.yaml`            |   ~1.5 s   | 200 steps, 1.3 M params, ~600 MB VRAM         |
-| Pretrain (30 M)     | `configs/pretrain/tiny_30m_4080.yaml`             |   ~30 s    | 2 000 steps, ~30 M params                     |
+| Pretrain (14 M)     | `configs/pretrain/tiny_30m_4080.yaml`             |   ~30 s    | 2 000 steps, ~14 M params                     |
 | Pretrain (100 M)    | `configs/pretrain/tiny_100m_4080.yaml`            |   ~30 min  | TinyStories, ~100 M params                    |
 | SFT LoRA  (smoke)   | `configs/sft/smollm2_135m_lora_fallback.yaml`     |   ~8 s     | SmolLM2-135M, LoRA r=8, peak ~1.2 GB VRAM     |
 | SFT LoRA  (Qwen)    | `configs/sft/qwen2_5_0_5b_lora_smoke.yaml`        |   ~30 s    | Qwen2.5-0.5B-Instruct, LoRA r=8               |
