@@ -66,16 +66,18 @@ make smoke
 
 That target chains together:
 
-1. `train-tokenizer` — trains a tiny BPE tokenizer on a synthetic local corpus
-2. `pretrain`        — trains a ~1.3 M-parameter TinyGPT for 200 steps
-3. `generate`        — produces text continuations from the checkpoint
-4. `sft`             — LoRA-finetunes `HuggingFaceTB/SmolLM2-135M-Instruct`
+1. `doctor`          — re-checks the environment (harmless re-run if you
+   already did step 4 above)
+2. `train-tokenizer` — trains a tiny BPE tokenizer on a synthetic local corpus
+3. `pretrain`        — trains a ~1.3 M-parameter TinyGPT for 200 steps
+4. `generate`        — produces text continuations from the checkpoint
+5. `sft`             — LoRA-finetunes `HuggingFaceTB/SmolLM2-135M-Instruct`
    on a synthetic instruction dataset
-5. `eval`            — scores 12 prompts (math, JSON formatting, rewriting,
+6. `eval`            — scores 12 prompts (math, JSON formatting, rewriting,
    summarization, sentiment)
-6. `bench-gpu`       — measures matmul TFLOPS and tiny-GPT generation speed
-7. `report`          — writes `results/rtx4080/report.html`
-8. `audit`           — placeholder audit
+7. `bench-gpu`       — measures matmul TFLOPS and tiny-GPT generation speed
+8. `report`          — writes `results/rtx4080/report.html`
+9. `audit`           — placeholder audit
 
 Open `results/rtx4080/report.html` in any browser.
 
